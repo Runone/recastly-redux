@@ -9,7 +9,7 @@ var SearchContainer = () => (<Search />);
 //HINT: use react-redux 'connect' method to generate a container component from
 //state and dispatch mappings.
 
-export default connect(handleSearchChange)(SearchContainer;
+export default connect(handleSearchChange)(SearchContainer);
 
 // use .connect method to connect our actions to the event handlers of each component
 
