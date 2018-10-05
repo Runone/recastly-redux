@@ -21,12 +21,12 @@ var currentVideoReducer = (state = null, action) => {
   
   switch (action.type) {
     case 'CHANGE_VIDEO':
-      return Object.assign({}, state, {...state, ...action.video});
+      return action.video || null;
       default:
-        return state
+        return state;
     }
   
-}
+};
 
 
 

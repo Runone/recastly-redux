@@ -2,18 +2,51 @@ import React from 'react';
 import Search from './../components/Search.js';
 import { connect } from 'react-redux';
 import handleSearchChange from '../actions/search.js';
-var SearchContainer = () => (<Search />);
+// var SearchContainer = (props) => {
+//   return (<Search />);
+// };
+
+
+var mapDispatchToProps = (dispatch) => ({
+  handleSearchInputChange: (q) => {
+    dispatch(handleSearchChange(q));
+  }
+});
 
 //TODO: define a SearchContainer component which will hook up your action
 // dispatchers with your search component props.
 //HINT: use react-redux 'connect' method to generate a container component from
 //state and dispatch mappings.
 
-export default connect(handleSearchChange)(SearchContainer);
+const SearchContainer = connect(null, mapDispatchToProps)(Search);
+
+export default SearchContainer;
 
 // use .connect method to connect our actions to the event handlers of each component
 
 // WHEN THEY MENTION TODOS THEY MEAN A ROOT REDUCER.
+
+// <div id="clickMe"></div>
+//-js file---
+// var state = {clickCount: 0}
+// var clickMeFunction = () => state.clickCount++;
+
+// user clicks the div: <div id="clickMe"></div> it triggers the "click" event
+// this div has a click handler which calls clickMeFunction
+// clickMeFunction is invoked, and state.clickCount is incrememented
+// state.clickCount === 1;
+
+// <div id="clickMe" onSomething="clickMeFunction"></div>
+
+// .connect takes in a React Component, and a function.
+// We have some React Component called "clickMeDiv"
+// looks like: <div id="clickMe"></div>
+
+// We have a function var clickMeFunction = () => state.clickCount++;
+
+// connect will look for an element that looks like clickMeDiv, the React Comp't.
+// it will add an attribute to a copy of that div that is the event handler that we need
+// it will replace the div with the modified copy.
 
 // connect(
 

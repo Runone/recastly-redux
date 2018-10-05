@@ -3,20 +3,21 @@ import changeVideoList from './videoList.js';
 import changeVideo from './currentVideo.js';
 import YOUTUBE_API_KEY from '../config/youtube.js';
 
+import _ from 'lodash';
+
 
 var handleVideoSearch = (q) => {
-  let myArray = [];
 
-  var pushToArray = function(item) {
-    myArray.push(item)
-  }
-
-  searchYouTube(q, pushToArray);
-
-  changeVideoList(myArray);
-
-  return () => ({value: q});
-
+  return _.debounce((dispatch) => {
+    let options = {
+      key: YOUTUBE_API_KEY,
+      query: q
+    };
+    searchYouTube(options, (videos) => {
+      dispatch(changeVideoList(videos));
+      dispatch(changeVideo(videos[0]));
+    });
+  }, 500);
 };
 
 export default handleVideoSearch;
